@@ -29,6 +29,9 @@ data:
     - type: mysql
       ports: [3306]
 
+    - type: redis
+      ports: [6379]
+
     processors:
       - add_cloud_metadata:
       - add_kubernetes_metadata:
