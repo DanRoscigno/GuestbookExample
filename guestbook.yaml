@@ -31,8 +31,8 @@ data:
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  creationTimestamp: null
-  name: apache2.conf
+  name: apache2-config
+  namespace: default
 data:
   apache2.conf: |-
     # see http://sources.debian.net/src/apache2/2.4.10-1/debian/config-dir/apache2.conf
@@ -236,11 +236,19 @@ spec:
         ports:
         - containerPort: 80
         volumeMounts:
+                #- name: apache2-config
+                #mountPath: /etc/apache2/apache2.conf
+                #readOnly: true
+                #subPath: apache2.conf
         - name: mod-status-config
           mountPath: /etc/apache2/mods-available/status.conf
           readOnly: true
           subPath: status.conf
       volumes:
+              #- name: apache2-config
+              #configMap:
+              #defaultMode: 0600
+              #name: apache2-config
         - name: mod-status-config
           configMap:
             defaultMode: 0600
