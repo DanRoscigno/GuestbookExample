@@ -161,3 +161,13 @@ spec:
           # value: env
         ports:
         - containerPort: 80
+        volumeMounts:
+        - name: mod-status-config
+          mountPath: /etc/apache2/mods-available/status.conf
+          readOnly: true
+          subPath: status.conf
+      volumes:
+        - name: mod-status-config
+          configMap:
+            defaultMode: 0600
+            name: mod-status-setup-config
