@@ -61,7 +61,17 @@ data:
           host: ${HOSTNAME}
           templates:
             - condition.equals:
-                kubernetes.labels.app: wordpress
+                kubernetes.labels.tier: backend
+              config:
+                - module: redis
+                  metricsets: ["info", "keyspace"]
+                  period: 10s
+
+                  # Redis hosts
+                  hosts: ["${data.host}:6379"]
+
+            - condition.equals:
+                kubernetes.labels.tier: frontend
               config:
                 - module: apache
                   metricsets: ["status"]
@@ -69,23 +79,6 @@ data:
 
                   # Apache hosts
                   hosts: ["http://${data.host}:80"]
-            - condition.contains:
-                kubernetes.container.name: mysql
-              config:
-                - module: mysql
-                  period: 10s
-                  metricsets: ["status"]
-                  hosts: ["tcp(${data.host}:3306)/"]
-                  username: root
-                  password: ${MYSQL_ROOT_PASSWORD}
-
-            - condition.contains:
-                kubernetes.container.name: nginx
-              config:
-                - module: nginx
-                  period: 10s
-                  metricsets: ["stubstatus"]
-                  hosts: ["${data.host}:8080"]
 
     processors:
       - add_cloud_metadata:
