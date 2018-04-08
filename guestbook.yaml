@@ -199,22 +199,23 @@ metadata:
 spec:
   # if your cluster supports it, uncomment the following to automatically create
   # an external load-balanced IP for the frontend service.
-  #type: LoadBalancer
-  type: NodePort
+  type: LoadBalancer
+  #type: NodePort
+  externalTrafficPolicy: Local
   ports:
   - port: 80
   selector:
     app: guestbook
     tier: frontend
 ---
-apiVersion: extensions/v1beta1
-kind: Ingress
-metadata:
-  name: frontend-ingress
-spec:
-  backend:
-    serviceName: frontend
-    servicePort: 80
+#apiVersion: extensions/v1beta1
+#kind: Ingress
+#metadata:
+#name: frontend-ingress
+#spec:
+#backend:
+#serviceName: frontend
+#servicePort: 80
 ---
 apiVersion: extensions/v1beta1
 kind: Deployment
@@ -246,19 +247,19 @@ spec:
         ports:
         - containerPort: 80
         volumeMounts:
-                #- name: apache2-config
-                #mountPath: /etc/apache2/apache2.conf
-                #readOnly: true
-                #subPath: apache2.conf
+        - name: apache2-config
+          mountPath: /etc/apache2/apache2.conf
+          readOnly: true
+          subPath: apache2.conf
         - name: mod-status-config
           mountPath: /etc/apache2/mods-available/status.conf
           readOnly: true
           subPath: status.conf
       volumes:
-              #- name: apache2-config
-              #configMap:
-              #defaultMode: 0600
-              #name: apache2-config
+        - name: apache2-config
+          configMap:
+            defaultMode: 0600
+            name: apache2-config
         - name: mod-status-config
           configMap:
             defaultMode: 0600
