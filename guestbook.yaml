@@ -199,12 +199,22 @@ metadata:
 spec:
   # if your cluster supports it, uncomment the following to automatically create
   # an external load-balanced IP for the frontend service.
-  type: LoadBalancer
+  #type: LoadBalancer
+  type: NodePort
   ports:
   - port: 80
   selector:
     app: guestbook
     tier: frontend
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: frontend-ingress
+spec:
+  backend:
+    serviceName: frontend
+    servicePort: 80
 ---
 apiVersion: extensions/v1beta1
 kind: Deployment
