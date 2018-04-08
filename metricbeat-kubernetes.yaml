@@ -127,11 +127,6 @@ spec:
             secretKeyRef:
               name: dynamic-logging
               key: ELASTIC_PASSWORD
-        - name: MYSQL_ROOT_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: mysql-pass
-              key: MYSQL_PASSWORD
         securityContext:
           runAsUser: 0
         resources:
@@ -235,11 +230,6 @@ spec:
             secretKeyRef:
               name: dynamic-logging
               key: ELASTIC_PASSWORD
-        - name: MYSQL_ROOT_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: mysql-pass
-              key: MYSQL_PASSWORD
         securityContext:
           runAsUser: 0
         resources:
@@ -315,11 +305,6 @@ spec:
             secretKeyRef:
               name: dynamic-logging
               key: ELASTIC_PASSWORD
-        - name: MYSQL_ROOT_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: mysql-pass
-              key: MYSQL_PASSWORD
         securityContext:
           runAsUser: 0
         volumeMounts:
