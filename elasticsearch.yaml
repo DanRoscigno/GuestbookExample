@@ -1,0 +1,6 @@
+watcher.actions.slack.service:
+  account:
+    monitoring:
+      url: <put your webhook URL here>
+      message_defaults:
+        from: Watcher
