@@ -1,10 +1,11 @@
+#### Note: These instructions may be GCP specific, this is where I have experience with Docker and Kubernetes.
 
 ### Authorization
 Create a cluster level role binding so that you can manipulate the system level namespace
 
 ```
 kubectl create clusterrolebinding cluster-admin-binding \
- --clusterrole=cluster-admin --user=dan.roscigno@gmail.com
+ --clusterrole=cluster-admin --user=<your email associated with GCP>
 ```
 
 ### Clone the YAML files
@@ -43,6 +44,7 @@ kubectl get pods --namespace=kube-system | grep kube-state
 
 ### Deploy the Guestbook example
 Note: This is mostly the default Guestbook example from https://github.com/kubernetes/examples/blob/master/guestbook/all-in-one/guestbook-all-in-one.yaml
+
 I added an ingress that preserves source IPs and added ConfigMaps for the Apache2 and Mod-Status configs so that I could block the /server-status endpoint from outside the internal network (actually apache2.conf is unedited, but I may need it later).
 
 ```
