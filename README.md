@@ -7,6 +7,9 @@ If this is your first experience with the Elastic stack I would recommend Elasti
 
 Make sure that you take note of the CLOUD ID and Elastic Password if you use Elastic Cloud or Elastic Cloud Enterprise.
 
+### Connect to your Kubernetes environment
+In my case this is the Google Cloud Kubernetes Engine.  I like this environment, and I love the free quota that they give out.  If you use a local environment open a terminal, I will use the console provided by Google.
+
 ### Authorization
 Create a cluster level role binding so that you can manipulate the system level namespace
 
