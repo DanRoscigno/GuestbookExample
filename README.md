@@ -20,7 +20,7 @@ kubectl create clusterrolebinding cluster-admin-binding \
 
 ### Clone the YAML files
 ```
-git clone git@github.com:DanRoscigno/GuestbookExample.git
+git clone https://github.com/DanRoscigno/GuestbookExample.git
 cd GuestbookExample
 ```
 ### Set the credentials
