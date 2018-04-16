@@ -20,7 +20,7 @@ kubectl create clusterrolebinding cluster-admin-binding \
 
 ### Clone the YAML files
 ```
-git clone git@github.com:DanRoscigno/GuestbookExample.git
+git clone https://github.com/DanRoscigno/GuestbookExample.git
 cd GuestbookExample
 ```
 ### Set the credentials
@@ -46,7 +46,7 @@ and create it if needed (by default it will not be there)
 
 ```
 go get k8s.io/kube-state-metrics
-cd /home/dan_roscigno/gopath/src/k8s.io/kube-state-metrics
+cd ${USER}/gopath/src/k8s.io/kube-state-metrics
 make container
 kubectl create -f kubernetes
 kubectl get pods --namespace=kube-system | grep kube-state 
