@@ -20,7 +20,7 @@ data:
         - type: kubernetes
           templates:
             - condition.contains:
-                kubernetes.pod.name: redis
+                kubernetes.labels.app: redis
               config:
                 - module: redis
                   log:
@@ -30,7 +30,7 @@ data:
                         - ${data.kubernetes.container.id}
                   slowlog:
                     enabled: true
-                    var.hosts: ["${data.host}:6378"]
+                    var.hosts: ["${data.host}:${data.port}"]
             - condition.contains:
                 kubernetes.labels.tier: frontend
               config:
