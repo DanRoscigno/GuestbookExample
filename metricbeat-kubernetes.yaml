@@ -51,6 +51,7 @@ data:
           - node
           - system
           - pod
+          - event
           - container
           - volume
         hosts: ["localhost:10255"]
