@@ -51,7 +51,8 @@ data:
           - node
           - system
           - pod
-          - event
+          # only uncomment - event here if you are not using kube-state-metrics
+          #- event
           - container
           - volume
         hosts: ["localhost:10255"]
@@ -111,7 +112,7 @@ spec:
       containers:
       - name: metricbeat
         image: docker.elastic.co/beats/metricbeat:6.2.3
-        imagePullPolicy: Always
+        #imagePullPolicy: Always
         args: [
           "-c", "/etc/metricbeat.yml",
           "-e",
@@ -185,6 +186,7 @@ data:
           - state_replicaset
           - state_pod
           - state_container
+          - event
         period: 10s
         hosts: ["kube-state-metrics:8080"]
 
@@ -212,10 +214,11 @@ spec:
         k8s-app: metricbeat
         kubernetes.io/cluster-service: "true"
     spec:
+      serviceAccountName: metricbeat
       containers:
       - name: metricbeat
         image: docker.elastic.co/beats/metricbeat:6.2.3
-        imagePullPolicy: Always
+        #imagePullPolicy: Always
         args: [
           "-c", "/etc/metricbeat.yml",
           "-e",
@@ -288,7 +291,7 @@ spec:
       restartPolicy: Never
       containers:
       - name: metricbeat-setup
-        imagePullPolicy: Always
+        #imagePullPolicy: Always
         image: docker.elastic.co/beats/metricbeat:6.2.3
         args: [
           "-c", "/etc/metricbeat.yml",
